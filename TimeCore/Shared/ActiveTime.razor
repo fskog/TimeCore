@@ -1,0 +1,48 @@
+﻿@* Start button
+    Title
+     Elapsed
+*@
+
+@if (Time != null)
+{
+
+    <div class="card">
+        <div class="card-body">
+            <inpt type="button" @onclick=ToggleRunning class="btn btn-info">@(Time.IsRunning ? $"Stop" : $"Start")</inpt>
+            <span>@Time.ElapsedMinutes</span>
+            <span>@Time.Title</span>
+
+            <ul class="list-group">
+                <li class="list-group-item">IsActive: @Time.IsRunning</li>
+                <li class="list-group-item">Title: @Time.Title</li>
+                <li class="list-group-item">StartTime: @Time.StartTime</li>
+                <li class="list-group-item">EndTime: @Time.EndTime</li>
+                <li class="list-group-item">Elapsed: @Time.Elapsed</li>
+                <li class="list-group-item">Elapsed: @Time.Elapsed.ToString(@"hh\:mm")</li>
+                <li class="list-group-item">Elapsed minutes: @Time.ElapsedMinutes</li>
+            </ul>
+        </div>
+    </div>
+
+
+}
+
+
+
+
+@code {
+    TimeEntity Time;
+    protected override void OnInitialized()
+    {
+        Time = new TimeEntity();
+    }
+
+    public void ToggleRunning()
+    {
+        if (Time.IsRunning) Time.Stop();
+        else Time.StartOrResume();
+    }
+
+
+
+}
